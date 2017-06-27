@@ -22,11 +22,9 @@
   "dependencies": {
     "async": "~0.2.10",
     "merge": "~1.1.2",
-    "ncp": "~0.5.0"
-  },
-  "peerDependencies": {
+    "ncp": "~0.5.0",
     "karma": "^1.7.0",
-    "nw": "^0.20.3"
+    "nw": "^0.20.3-sdk"
   },
   "license": "MIT",
   "devDependencies": {
