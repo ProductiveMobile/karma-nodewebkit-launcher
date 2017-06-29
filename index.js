@@ -9,6 +9,7 @@ var NodeWebkitBrowser = function(baseBrowserDecorator, args) {
   baseBrowserDecorator(this);
 
   var customOptions = args.options || {};
+  var userDataDir = args.userDataDir;
   var searchPaths = (args.paths || ['node_modules']).map(function(searchPath) {
     return path.join(process.cwd(), searchPath);
   });
@@ -42,7 +43,14 @@ var NodeWebkitBrowser = function(baseBrowserDecorator, args) {
       }],
       'exec': ['index.html:write', 'package.json:write', function(callback) {
         process.env.NODE_PATH = searchPaths.join(path.delimiter);
-        self._execCommand(self._getCommand(), [STATIC_PATH]);
+        if (userDataDir) {
+          self._execCommand(self._getCommand(), [
+            '--user-data-dir=' + userDataDir,
+            STATIC_PATH
+          ]);
+        } else {
+          self._execCommand(self._getCommand(), [STATIC_PATH]);
+        }
       }]
     });
   };
